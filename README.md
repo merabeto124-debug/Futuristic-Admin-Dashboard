@@ -4,19 +4,21 @@ An ultra-modern, fully responsive admin dashboard layout built with **pure HTML 
 
 ## 🔴 Live Demo
 
-**✅ Verified public URL (jsDelivr CDN — no setup, works instantly):**
+**✅ Verified — renders the real styled dashboard (HTML Preview service):**
 
-> ### https://cdn.jsdelivr.net/gh/merabeto124-debug/Futuristic-Admin-Dashboard@38873bb02feb5aa838115bd94fd2a192cc493470/index.html
+> ### https://htmlpreview.github.io/?https://raw.githubusercontent.com/merabeto124-debug/Futuristic-Admin-Dashboard/1d2e58403a568bdd426290a74cc80d8930338c92/standalone.html
 
-This exact version is permanently cached on the jsDelivr CDN and always works.
+*(Pinned to an exact commit — this link never breaks.)*
 
-**Always-latest version** (follows the `arena` branch, refreshed within ~12h):
+**Always-latest version** (follows the `arena` branch):
 
 ```
-https://cdn.jsdelivr.net/gh/merabeto124-debug/Futuristic-Admin-Dashboard@arena%2F01a08645-futuristic-admin-dashboard/index.html
+https://htmlpreview.github.io/?https://raw.githubusercontent.com/merabeto124-debug/Futuristic-Admin-Dashboard/arena/01a08645-futuristic-admin-dashboard/standalone.html
 ```
 
-**Also available:** workspace Live Preview (port 8000) · any static host (Netlify Drop, Vercel) · GitHub Pages after enabling it in Settings → Pages.
+**Backup** (jsDelivr/githack serve HTML as plain text or with a one-click confirmation, so HTML Preview above is the recommended link).
+
+> ℹ️ `standalone.html` is a build of the dashboard with `styles.css` inlined — it renders anywhere, even hosts that ignore relative paths. The canonical source stays `index.html` + `styles.css`.
 
 ## ✨ Features
 
