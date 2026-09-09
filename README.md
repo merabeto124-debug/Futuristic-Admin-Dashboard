@@ -10,10 +10,10 @@ An ultra-modern, fully responsive admin dashboard layout built with **pure HTML 
 
 *(Pinned to an exact commit — this link never breaks.)*
 
-**Always-latest version** (follows the `arena` branch):
+**Always-latest version** (follows `main`):
 
 ```
-https://htmlpreview.github.io/?https://raw.githubusercontent.com/merabeto124-debug/Futuristic-Admin-Dashboard/arena/01a08645-futuristic-admin-dashboard/standalone.html
+https://htmlpreview.github.io/?https://raw.githubusercontent.com/merabeto124-debug/Futuristic-Admin-Dashboard/main/standalone.html
 ```
 
 **Backup** (jsDelivr/githack serve HTML as plain text or with a one-click confirmation, so HTML Preview above is the recommended link).
