@@ -3,435 +3,574 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="color-scheme" content="dark" />
-  <meta name="description" content="Nebula — an ultra-modern dark-mode admin dashboard built with pure HTML & CSS." />
-  <title>Nebula · Admin Dashboard</title>
+  <title>Nebula · Ultra Executive Dashboard</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* ============================================================
+       NEBULA UI v2.0 — Executive Modern Dark System
+       Pure HTML + CSS · Ultra Polish & Modern Standard
+       ============================================================ */
+
+    :root {
+      /* Core System Colors (Linear/Vercel Aesthetic) */
+      --bg-base:        #090a0f;
+      --bg-surface:     #11131b;
+      --bg-elevated:    #181b26;
+      --bg-hover:       #1f2333;
+      
+      /* Primary & Accents */
+      --accent:         #6366f1;
+      --accent-light:   #818cf8;
+      --accent-glow:    rgba(99, 102, 241, 0.25);
+      --emerald:        #10b981;
+      --amber:          #f59e0b;
+      --rose:           #f43f5e;
+      --cyan:           #06b6d4;
+
+      /* Text Hierarchy */
+      --text-main:      #f3f4f6;
+      --text-sub:       #9ca3af;
+      --text-muted:     #6b7280;
+
+      /* Borders & Lines */
+      --border:         rgba(255, 255, 255, 0.08);
+      --border-bright:  rgba(255, 255, 255, 0.16);
+      
+      /* Sizing & Layout */
+      --sidebar-w:      260px;
+      --topbar-h:       64px;
+      --radius-lg:      16px;
+      --radius-md:      10px;
+      --radius-sm:      6px;
+
+      /* Motion Curves */
+      --ease-smooth:    cubic-bezier(0.16, 1, 0.3, 1);
+      --transition:     0.2s var(--ease-smooth);
+
+      --font-sans:     'Plus Jakarta Sans', -apple-system, sans-serif;
+      --font-mono:     'JetBrains Mono', monospace;
+    }
+
+    /* Reset & Base */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--bg-base);
+      color: var(--text-main);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    svg { display: block; flex-shrink: 0; }
+    button { font: inherit; color: inherit; background: none; border: none; cursor: pointer; }
+    a { color: inherit; text-decoration: none; }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg-base); }
+    ::-webkit-scrollbar-thumb { background: var(--border-bright); border-radius: 99px; }
+
+    /* Layout Structure */
+    .app-shell {
+      display: grid;
+      grid-template-columns: var(--sidebar-w) 1fr;
+      min-height: 100vh;
+    }
+
+    /* ============================================================
+       SIDEBAR
+       ============================================================ */
+    .sidebar {
+      background: var(--bg-surface);
+      border-right: 1px solid var(--border);
+      padding: 20px 16px;
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      top: 0; bottom: 0; left: 0;
+      width: var(--sidebar-w);
+      z-index: 50;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 4px 8px 24px;
+    }
+
+    .brand-icon {
+      width: 32px; height: 32px;
+      background: linear-gradient(135deg, var(--accent), #8b5cf6);
+      border-radius: var(--radius-md);
+      display: grid;
+      place-items: center;
+      box-shadow: 0 4px 12px var(--accent-glow);
+    }
+
+    .brand-title {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .nav-group { margin-bottom: 24px; }
+    .nav-label {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      padding: 0 10px 8px;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 9px 12px;
+      border-radius: var(--radius-md);
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--text-sub);
+      transition: var(--transition);
+      margin-bottom: 2px;
+    }
+
+    .nav-item:hover {
+      color: var(--text-main);
+      background: var(--bg-elevated);
+    }
+
+    .nav-item.active {
+      color: #fff;
+      background: var(--accent);
+      box-shadow: 0 4px 14px var(--accent-glow);
+    }
+
+    .nav-item .badge {
+      margin-left: auto;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 99px;
+      background: rgba(255,255,255,0.15);
+    }
+
+    /* ============================================================
+       MAIN CONTENT AREA
+       ============================================================ */
+    .main-wrapper {
+      grid-column: 2;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Topbar */
+    .topbar {
+      height: var(--topbar-h);
+      border-bottom: 1px solid var(--border);
+      background: rgba(9, 10, 15, 0.8);
+      backdrop-filter: blur(12px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 32px;
+      position: sticky;
+      top: 0;
+      z-index: 40;
+    }
+
+    .search-box {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      padding: 7px 14px;
+      border-radius: var(--radius-md);
+      width: 320px;
+      transition: var(--transition);
+    }
+
+    .search-box:focus-within {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-glow);
+    }
+
+    .search-box input {
+      background: none;
+      border: none;
+      outline: none;
+      color: var(--text-main);
+      font-size: 13px;
+      width: 100%;
+    }
+
+    .shortcut {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+      padding: 2px 5px;
+      border-radius: 4px;
+    }
+
+    .topbar-right { display: flex; align-items: center; gap: 16px; }
+
+    .user-profile {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 4px 8px;
+      border-radius: var(--radius-md);
+      transition: var(--transition);
+    }
+
+    .user-profile:hover { background: var(--bg-surface); }
+
+    .avatar {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--emerald), var(--cyan));
+      display: grid; place-items: center;
+      font-size: 12px; font-weight: 700;
+    }
+
+    /* Content Body */
+    .content {
+      padding: 32px;
+      max-width: 1300px;
+      width: 100%;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    .page-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .page-title h1 {
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    .page-title p {
+      font-size: 13.5px;
+      color: var(--text-sub);
+      margin-top: 2px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      border-radius: var(--radius-md);
+      font-size: 13px;
+      font-weight: 600;
+      transition: var(--transition);
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      box-shadow: 0 2px 10px var(--accent-glow);
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-light);
+      transform: translateY(-1px);
+    }
+
+    /* Stats Grid */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .stat-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      transition: var(--transition);
+    }
+
+    .stat-card:hover {
+      border-color: var(--border-bright);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.4);
+    }
+
+    .stat-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .stat-title {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-sub);
+    }
+
+    .stat-value {
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      font-family: var(--font-mono);
+    }
+
+    .trend {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 99px;
+    }
+
+    .trend.up { background: rgba(16, 185, 129, 0.1); color: var(--emerald); }
+    .trend.down { background: rgba(244, 63, 94, 0.1); color: var(--rose); }
+
+    /* Main Chart & Panels */
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 20px;
+    }
+
+    .panel {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+    }
+
+    .panel-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .panel-title { font-size: 16px; font-weight: 700; }
+
+    /* Simple Clean Table */
+    .table-container { width: 100%; overflow-x: auto; }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+
+    th {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    td {
+      padding: 14px 16px;
+      font-size: 13.5px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text-sub);
+    }
+
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: var(--bg-elevated); color: var(--text-main); }
+
+    .status-pill {
+      padding: 3px 10px;
+      border-radius: 99px;
+      font-size: 11px;
+      font-weight: 600;
+      display: inline-block;
+    }
+
+    .status-success { background: rgba(16, 185, 129, 0.12); color: var(--emerald); }
+    .status-pending { background: rgba(245, 158, 11, 0.12); color: var(--amber); }
+
+    @media (max-width: 1024px) {
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .dashboard-grid { grid-template-columns: 1fr; }
+      .app-shell { grid-template-columns: 1fr; }
+      .sidebar { display: none; }
+      .main-wrapper { grid-column: 1; }
+    }
+  </style>
 </head>
 <body>
 
-  <!-- Off-canvas sidebar toggle (checkbox hack — no JS needed) -->
-  <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Toggle navigation" />
-
-  <div class="app">
-
-    <!-- ============ SIDEBAR ============ -->
+  <div class="app-shell">
+    <!-- Sidebar Navigation -->
     <aside class="sidebar">
       <div class="brand">
-        <span class="brand-mark" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-        </span>
-        <span class="brand-name">Nebula<em>UI</em></span>
+        <div class="brand-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        </div>
+        <span class="brand-title">Nebula</span>
       </div>
 
-      <nav class="nav">
-        <p class="nav-title">Main</p>
-
-        <a href="#" class="nav-link is-active" aria-current="page">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.8"/><rect x="14" y="3" width="7" height="7" rx="1.8"/><rect x="3" y="14" width="7" height="7" rx="1.8"/><rect x="14" y="14" width="7" height="7" rx="1.8"/></svg>
-          <span class="nav-label">Dashboard</span>
+      <div class="nav-group">
+        <div class="nav-label">Core</div>
+        <a href="#" class="nav-item active">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+          Overview
         </a>
-
-        <a href="#" class="nav-link">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l4-5 3 3 5-7"/></svg>
-          <span class="nav-label">Analytics</span>
+        <a href="#" class="nav-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>
+          Analytics
         </a>
-
-        <a href="#" class="nav-link">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
-          <span class="nav-label">Projects</span>
-          <span class="nav-badge">8</span>
+        <a href="#" class="nav-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+          Customers
+          <span class="badge">12</span>
         </a>
+      </div>
 
-        <a href="#" class="nav-link">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="4.5"/><path d="M8.4 12.3l2.4 2.4 4.8-5.2"/></svg>
-          <span class="nav-label">Tasks</span>
-        </a>
-
-        <a href="#" class="nav-link">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M8 3v4M16 3v4M3 10.5h18"/></svg>
-          <span class="nav-label">Calendar</span>
-        </a>
-
-        <p class="nav-title">General</p>
-
-        <a href="#" class="nav-link">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-12.4 7.6L3 21l1.9-5.6A8.5 8.5 0 1 1 21 11.5z"/></svg>
-          <span class="nav-label">Messages</span>
-          <span class="nav-badge">3</span>
-        </a>
-
-        <a href="#" class="nav-link">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 8-3 8h18s-3-1-3-8"/><path d="M13.7 20a2 2 0 0 1-3.4 0"/></svg>
-          <span class="nav-label">Notifications</span>
-          <span class="nav-dot" aria-hidden="true"></span>
-        </a>
-
-        <a href="#" class="nav-link">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="21" x2="5" y2="14"/><line x1="5" y1="10" x2="5" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="19" y1="21" x2="19" y2="16"/><line x1="19" y1="12" x2="19" y2="3"/><line x1="2.5" y1="14" x2="7.5" y2="14"/><line x1="9.5" y1="8" x2="14.5" y2="8"/><line x1="16.5" y1="16" x2="21.5" y2="16"/></svg>
-          <span class="nav-label">Settings</span>
-        </a>
-      </nav>
-
-      <div class="sidebar-footer">
-        <div class="upgrade-card">
-          <p class="upgrade-title">Unlock Pro Analytics</p>
-          <p class="upgrade-text">Real-time insights, exports &amp; AI reports.</p>
-          <button type="button" class="btn btn-primary btn-sm">Upgrade</button>
-        </div>
-
-        <a href="#" class="nav-link logout">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
-          <span class="nav-label">Log out</span>
+      <div class="nav-group">
+        <div class="nav-label">Settings</div>
+        <a href="#" class="nav-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          System Settings
         </a>
       </div>
     </aside>
 
-    <!-- Click-to-close overlay for the mobile drawer -->
-    <label for="nav-toggle" class="backdrop" aria-hidden="true"></label>
-
-    <!-- ============ MAIN ============ -->
-    <div class="main">
-
-      <!-- Header -->
+    <!-- Main Workspace -->
+    <div class="main-wrapper">
       <header class="topbar">
-        <label for="nav-toggle" class="hamburger" aria-label="Open navigation" role="button" tabindex="0">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="14" y2="17"/></svg>
-        </label>
-
-        <div class="search" role="search">
-          <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.3" y2="16.3"/></svg>
-          <input type="search" placeholder="Search anything…" aria-label="Search" />
-          <kbd>⌘K</kbd>
+        <div class="search-box">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" placeholder="Search commands, metrics...">
+          <span class="shortcut">⌘K</span>
         </div>
 
-        <div class="topbar-actions">
-          <span class="live-pill"><span class="pulse-dot" aria-hidden="true"></span>Live</span>
-
-          <button type="button" class="icon-btn" aria-label="Toggle theme">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
-          </button>
-
-          <button type="button" class="icon-btn has-badge" aria-label="Notifications">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 8-3 8h18s-3-1-3-8"/><path d="M13.7 20a2 2 0 0 1-3.4 0"/></svg>
-          </button>
-
-          <button type="button" class="profile" aria-label="Account menu">
-            <span class="avatar" aria-hidden="true">AR</span>
-            <span class="profile-meta">
-              <span class="profile-name">Alex Rivera</span>
-              <span class="profile-role">Product Admin</span>
-            </span>
-            <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-          </button>
+        <div class="topbar-right">
+          <div class="user-profile">
+            <div class="avatar">AR</div>
+            <span style="font-size: 13px; font-weight: 600;">Alex Rivera</span>
+          </div>
         </div>
       </header>
 
-      <!-- Content -->
       <main class="content">
-
-        <div class="page-head">
-          <div>
-            <h1>Dashboard</h1>
-            <p class="subtitle">Welcome back, Alex — here's what's happening across Nebula today.</p>
+        <div class="page-header">
+          <div class="page-title">
+            <h1>Executive Overview</h1>
+            <p>Real-time performance metrics and recent operational logs.</p>
           </div>
-          <div class="page-actions">
-            <button type="button" class="btn btn-ghost">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-              Export
-            </button>
-            <button type="button" class="btn btn-primary">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-              New report
-            </button>
+          <button class="btn btn-primary">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Create Report
+          </button>
+        </div>
+
+        <!-- Metric Cards -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-head">
+              <span class="stat-title">Total Revenue</span>
+              <span class="trend up">+12.4%</span>
+            </div>
+            <div class="stat-value">$84,254.00</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-head">
+              <span class="stat-title">Active Subscriptions</span>
+              <span class="trend up">+8.1%</span>
+            </div>
+            <div class="stat-value">12,480</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-head">
+              <span class="stat-title">Bounce Rate</span>
+              <span class="trend down">-1.2%</span>
+            </div>
+            <div class="stat-value">3.42%</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-head">
+              <span class="stat-title">Avg. Response Time</span>
+              <span class="trend up">-24ms</span>
+            </div>
+            <div class="stat-value">142ms</div>
           </div>
         </div>
 
-        <!-- ======== 4 STAT CARDS ======== -->
-        <section class="stats-grid" aria-label="Key statistics">
-
-          <article class="stat-card" style="--tint: 99,102,241;">
-            <div class="stat-top">
-              <span class="stat-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-              </span>
-              <span class="delta up">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="8 7 17 7 17 16"/></svg>
-                12.4%
-              </span>
+        <!-- Dashboard Grid Panels -->
+        <div class="dashboard-grid">
+          <div class="panel">
+            <div class="panel-head">
+              <span class="panel-title">Recent Transactions</span>
             </div>
-            <p class="stat-label">Total Revenue</p>
-            <p class="stat-value">$84,254</p>
-            <svg class="sparkline" viewBox="0 0 120 40" preserveAspectRatio="none" aria-hidden="true">
-              <path d="M2 32 C14 28 20 20 32 22 C44 24 52 12 64 14 C76 16 84 8 96 10 C104 11 112 6 118 4"/>
-            </svg>
-          </article>
-
-          <article class="stat-card" style="--tint: 34,211,238;">
-            <div class="stat-top">
-              <span class="stat-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.9"/><path d="M16 3.1a4 4 0 0 1 0 7.8"/></svg>
-              </span>
-              <span class="delta up">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="8 7 17 7 17 16"/></svg>
-                8.1%
-              </span>
+            <div class="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Customer</th>
+                    <th>Date</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td style="font-weight: 600; color: var(--text-main);">Maya Chen</td>
+                    <td>Today, 09:41</td>
+                    <td style="font-family: var(--font-mono);">$250.00</td>
+                    <td><span class="status-pill status-success">Completed</span></td>
+                  </tr>
+                  <tr>
+                    <td style="font-weight: 600; color: var(--text-main);">Liam Ortiz</td>
+                    <td>Today, 08:57</td>
+                    <td style="font-family: var(--font-mono);">$1,200.00</td>
+                    <td><span class="status-pill status-success">Completed</span></td>
+                  </tr>
+                  <tr>
+                    <td style="font-weight: 600; color: var(--text-main);">Noah Kim</td>
+                    <td>Yesterday</td>
+                    <td style="font-family: var(--font-mono);">$80.00</td>
+                    <td><span class="status-pill status-pending">Pending</span></td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
-            <p class="stat-label">Active Users</p>
-            <p class="stat-value">12,480</p>
-            <svg class="sparkline" viewBox="0 0 120 40" preserveAspectRatio="none" aria-hidden="true">
-              <path d="M2 30 C12 32 20 24 30 26 C40 28 48 18 60 18 C72 18 78 24 88 16 C98 8 110 10 118 6"/>
-            </svg>
-          </article>
-
-          <article class="stat-card" style="--tint: 251,191,36;">
-            <div class="stat-top">
-              <span class="stat-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="0.8"/></svg>
-              </span>
-              <span class="delta down">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="7" x2="17" y2="17"/><polyline points="17 8 17 17 8 17"/></svg>
-                1.2%
-              </span>
-            </div>
-            <p class="stat-label">Conversion Rate</p>
-            <p class="stat-value">3.42%</p>
-            <svg class="sparkline" viewBox="0 0 120 40" preserveAspectRatio="none" aria-hidden="true">
-              <path d="M2 10 C14 12 22 8 34 14 C46 20 54 16 66 22 C78 28 88 24 100 30 C108 34 112 32 118 34"/>
-            </svg>
-          </article>
-
-          <article class="stat-card" style="--tint: 52,211,153;">
-            <div class="stat-top">
-              <span class="stat-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7h12l1.2 12.4a1.8 1.8 0 0 1-1.8 2H6.6a1.8 1.8 0 0 1-1.8-2z"/><path d="M9 10V6a3 3 0 0 1 6 0v4"/></svg>
-              </span>
-              <span class="delta up">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="8 7 17 7 17 16"/></svg>
-                4.9%
-              </span>
-            </div>
-            <p class="stat-label">Total Orders</p>
-            <p class="stat-value">2,314</p>
-            <svg class="sparkline" viewBox="0 0 120 40" preserveAspectRatio="none" aria-hidden="true">
-              <path d="M2 26 C14 22 22 28 34 24 C46 20 56 26 68 18 C80 10 90 16 100 10 C108 6 112 8 118 5"/>
-            </svg>
-          </article>
-
-        </section>
-
-        <!-- ======== CHART + SIDE PANEL ======== -->
-        <section class="panels-grid" aria-label="Analytics">
-
-          <article class="card chart-card">
-            <div class="card-head">
-              <div>
-                <h2>Revenue Overview</h2>
-                <p class="card-sub">Earnings vs expenses · last 7 months</p>
-              </div>
-              <div class="seg" role="group" aria-label="Date range">
-                <button type="button">7d</button>
-                <button type="button" class="is-active">30d</button>
-                <button type="button">90d</button>
-                <button type="button">1y</button>
-              </div>
-            </div>
-
-            <div class="legend">
-              <span class="legend-item"><i class="dot dot-accent"></i>Revenue</span>
-              <span class="legend-item"><i class="dot dot-cyan"></i>Expenses</span>
-            </div>
-
-            <div class="chart-wrap">
-              <svg class="chart" viewBox="0 0 720 250" preserveAspectRatio="none" role="img" aria-label="Line chart comparing revenue and expenses over seven months">
-                <defs>
-                  <linearGradient id="areaFill" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stop-color="#6366f1" stop-opacity="0.32"/>
-                    <stop offset="100%" stop-color="#6366f1" stop-opacity="0"/>
-                  </linearGradient>
-                </defs>
-
-                <!-- grid -->
-                <line x1="0" y1="20"  x2="720" y2="20"  class="grid-line"/>
-                <line x1="0" y1="70"  x2="720" y2="70"  class="grid-line"/>
-                <line x1="0" y1="120" x2="720" y2="120" class="grid-line"/>
-                <line x1="0" y1="170" x2="720" y2="170" class="grid-line"/>
-                <line x1="0" y1="220" x2="720" y2="220" class="grid-line"/>
-
-                <!-- expenses (dashed) -->
-                <path class="line-expenses" pathLength="1" fill="none"
-                  d="M20 205 C80 195 120 178 180 182 C240 186 280 162 340 166 C400 170 440 148 500 152 C560 156 620 138 700 142"/>
-
-                <!-- revenue area + line -->
-                <path class="line-area" fill="url(#areaFill)"
-                  d="M20 200 C80 185 120 140 180 148 C240 156 270 190 330 170 C390 150 430 96 490 104 C550 112 600 150 660 118 C690 102 700 88 706 84 L706 250 L20 250 Z"/>
-                <path class="line-revenue" pathLength="1" fill="none"
-                  d="M20 200 C80 185 120 140 180 148 C240 156 270 190 330 170 C390 150 430 96 490 104 C550 112 600 150 660 118 C690 102 700 88 706 84"/>
-
-                <!-- points -->
-                <circle class="chart-dot" cx="330" cy="170" r="4"/>
-                <circle class="chart-dot halo" cx="330" cy="170" r="9"/>
-                <circle class="chart-dot" cx="706" cy="84" r="4.5"/>
-                <circle class="chart-dot halo" cx="706" cy="84" r="10"/>
-              </svg>
-
-              <div class="chart-x" aria-hidden="true">
-                <span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span><span>Jul</span><span>Aug</span>
-              </div>
-            </div>
-          </article>
-
-          <article class="card side-card">
-            <div class="card-head">
-              <div>
-                <h2>Storage</h2>
-                <p class="card-sub">Team workspace</p>
-              </div>
-            </div>
-
-            <div class="ring-wrap">
-              <div class="ring" role="img" aria-label="Storage 72 percent used"></div>
-              <div class="ring-meta">
-                <strong>72%</strong>
-                <span>148 GB of 200 GB used</span>
-              </div>
-            </div>
-
-            <div class="goals">
-              <p class="goals-title">Weekly goals</p>
-
-              <div class="goal" style="--w: 68%;">
-                <div class="goal-row"><span>Revenue target</span><span>68%</span></div>
-                <div class="track"><i class="fill fill-accent"></i></div>
-              </div>
-
-              <div class="goal" style="--w: 45%;">
-                <div class="goal-row"><span>New sign-ups</span><span>45%</span></div>
-                <div class="track"><i class="fill fill-cyan"></i></div>
-              </div>
-
-              <div class="goal" style="--w: 81%;">
-                <div class="goal-row"><span>CSAT score</span><span>81%</span></div>
-                <div class="track"><i class="fill fill-green"></i></div>
-              </div>
-            </div>
-          </article>
-
-        </section>
-
-        <!-- ======== RECENT ACTIVITY TABLE ======== -->
-        <section class="card table-card" aria-label="Recent activity">
-          <div class="card-head">
-            <div>
-              <h2>Recent Activity</h2>
-              <p class="card-sub">Latest events across your workspace</p>
-            </div>
-            <button type="button" class="btn btn-ghost btn-sm">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.6 10 19 14 21 14 12.6 22 3"/></svg>
-              Filter
-            </button>
           </div>
 
-          <div class="table-scroll">
-            <table>
-              <thead>
-                <tr>
-                  <th>Customer</th>
-                  <th>Activity</th>
-                  <th>Date &amp; time</th>
-                  <th class="num">Amount</th>
-                  <th>Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>
-                    <div class="user">
-                      <span class="avatar sm" style="--a:#6366f1; --b:#a855f7;">MC</span>
-                      <div><strong>Maya Chen</strong><small>maya@nebula.io</small></div>
-                    </div>
-                  </td>
-                  <td data-label="Activity">Deployed <em>Orion v2.4</em> to production</td>
-                  <td data-label="Date">Today, 09:41</td>
-                  <td class="num" data-label="Amount">—</td>
-                  <td data-label="Status"><span class="pill pill-green">Completed</span></td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="user">
-                      <span class="avatar sm" style="--a:#22d3ee; --b:#6366f1;">LO</span>
-                      <div><strong>Liam Ortiz</strong><small>liam@nebula.io</small></div>
-                    </div>
-                  </td>
-                  <td data-label="Activity">Payment received · <em>Invoice #4821</em></td>
-                  <td data-label="Date">Today, 08:57</td>
-                  <td class="num pos" data-label="Amount">+$2,400.00</td>
-                  <td data-label="Status"><span class="pill pill-green">Completed</span></td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="user">
-                      <span class="avatar sm" style="--a:#f472b6; --b:#fb7185;">SR</span>
-                      <div><strong>Sofia Reyes</strong><small>sofia@nebula.io</small></div>
-                    </div>
-                  </td>
-                  <td data-label="Activity">Updated <em>design-system</em> tokens</td>
-                  <td data-label="Date">Today, 08:12</td>
-                  <td class="num" data-label="Amount">—</td>
-                  <td data-label="Status"><span class="pill pill-indigo">In review</span></td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="user">
-                      <span class="avatar sm" style="--a:#fbbf24; --b:#f97316;">NK</span>
-                      <div><strong>Noah Kim</strong><small>noah@nebula.io</small></div>
-                    </div>
-                  </td>
-                  <td data-label="Activity">Rotated API key for <em>staging</em></td>
-                  <td data-label="Date">Yesterday, 17:26</td>
-                  <td class="num" data-label="Amount">—</td>
-                  <td data-label="Status"><span class="pill pill-amber">Pending</span></td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="user">
-                      <span class="avatar sm" style="--a:#34d399; --b:#22d3ee;">AP</span>
-                      <div><strong>Ava Patel</strong><small>ava@nebula.io</small></div>
-                    </div>
-                  </td>
-                  <td data-label="Activity">Refund issued · <em>Invoice #4795</em></td>
-                  <td data-label="Date">Yesterday, 14:03</td>
-                  <td class="num neg" data-label="Amount">−$129.00</td>
-                  <td data-label="Status"><span class="pill pill-red">Failed</span></td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="user">
-                      <span class="avatar sm" style="--a:#818cf8; --b:#22d3ee;">ER</span>
-                      <div><strong>Ethan Ross</strong><small>ethan@nebula.io</small></div>
-                    </div>
-                  </td>
-                  <td data-label="Activity">Invited <em>3 teammates</em> to workspace</td>
-                  <td data-label="Date">Sep 07, 11:19</td>
-                  <td class="num" data-label="Amount">—</td>
-                  <td data-label="Status"><span class="pill pill-green">Completed</span></td>
-                </tr>
-              </tbody>
-            </table>
+          <div class="panel">
+            <div class="panel-head">
+              <span class="panel-title">System Status</span>
+            </div>
+            <p style="font-size: 13px; color: var(--text-sub);">All services operational with 99.98% uptime in the last 30 days.</p>
           </div>
-        </section>
-
-        <footer class="footer">
-          <p>Nebula UI · crafted with pure HTML &amp; CSS — no JavaScript · © 2026</p>
-        </footer>
-
+        </div>
       </main>
     </div>
   </div>
 
 </body>
 </html>
+
