@@ -4,9 +4,15 @@ An ultra-modern, fully responsive admin dashboard layout built with **pure HTML 
 
 ## 🔴 Live Demo
 
-> **https://8000-ipf6r14w7cbdpwexrzoqa.e2b.app**
+**Option 1 — Workspace preview:** Use the **Live Preview** button in the Arena workspace (served on port `8000` while the session is running).
 
-*(Live sandbox preview — available while this session is running. You can also run it locally: `python3 -m http.server 8000`)*
+**Option 2 — Permanent URL (GitHub Pages):** Enable it in one minute, no build step needed:
+
+> **Settings → Pages → Source: "Deploy from a branch" → Branch: `main` / root → Save**
+>
+> The site will go live at: **https://merabeto124-debug.github.io/Futuristic-Admin-Dashboard/**
+
+**Option 3 — Instant hosting:** Drag & drop `index.html` + `styles.css` onto [Netlify Drop](https://app.netlify.com/drop) or [Vercel](https://vercel.com/new).
 
 ## ✨ Features
 
