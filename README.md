@@ -2,6 +2,12 @@
 
 An ultra-modern, fully responsive admin dashboard layout built with **pure HTML & CSS** — zero JavaScript.
 
+## 🔴 Live Demo
+
+> **https://8000-ipf6r14w7cbdpwexrzoqa.e2b.app**
+
+*(Live sandbox preview — available while this session is running. You can also run it locally: `python3 -m http.server 8000`)*
+
 ## ✨ Features
 
 - **CSS Grid + Flexbox** layout system (grid app shell, flex header/rows)
